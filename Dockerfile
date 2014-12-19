@@ -1,8 +1,7 @@
-FROM scratch
+FROM chanwit/fedora-armhf:latest
 MAINTAINER Chanwit Kaewkasi <chanwit@sut.ac.th>
-ADD fedora-21-armhf-minimal.tar.xz /
 
-RUN yum -y install openssh-server pwgen
+RUN yum -y install pwgen
 RUN rm -f /etc/ssh/ssh_*_key && ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && sed -i "s/#*UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config && ssh-keygen -q -N "" -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key && sed -i "s/#*UseDNS.*/UseDNS no/g" /etc/ssh/sshd_config
 
 # Add scripts
